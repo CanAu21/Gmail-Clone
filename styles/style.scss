@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 @import "modules";
+@import "modal";
 
 *{
     margin: 0;
@@ -177,17 +178,57 @@ main{
     font-size: 16px;
     padding: 10px;
     border-bottom: 1px solid white;
+    column-gap: 5px;
+    cursor: pointer;
+
+    &:hover{
+        box-shadow: 0 0 30px rgba(128,128,128,0.408);
+    }
+
+    .info{
+        display: flex;
+        gap: 6px;
+    }
 
     .content{
         display: flex;
+        
 
         .title{
             font-weight: bold;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
+
+        .text{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        
     }
 
     .time{
         text-align: end;
+        white-space: nowrap;
+    }
+
+    &:hover > .time{
+        display: none;
+    }
+
+    #delete {
+        display: none;
+        border: none;
+        background: none;
+        font-size: 15px;
+        text-align: end;
+        cursor: pointer;
+    }
+
+    &:hover > #delete {
+        display: block;
     }
 }
 
