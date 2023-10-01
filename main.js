@@ -14,6 +14,11 @@ let mailData = JSON.parse(strData);
 document.addEventListener("DOMContentLoaded",() =>{
     renderCategories(categories,"Gelen Kutusu");
     renderMails(mailData);
+
+    // Sayfa Genişliğine Göre Navbarı Kapatma
+    if(window.innerWidth< 1200) {
+        ele.nav.classList.add("hide");
+    }
 });
 
 //! Kategori İşlemleri
@@ -23,6 +28,17 @@ ele.categoryList.addEventListener("click", (event) => {
     const selected = event.target.dataset.id;
     // Active olanı güncelleme için kategorileri tekrardan ekrana bas
     renderCategories(categories, selected);
+
+    // Tıklanılan elemana göre mailleri yazma
+    if(selected === "2"){
+        // Yıldızlı olan mailleri belirleme
+        const filtred = mailData.filter((i)=>i.starred === true);
+        // ekranı güncelleme
+        renderMails(filtred);
+    } else {
+        // gelen kutusunu güncelleme
+        renderMails(mailData);
+    }
 });
 
 // Hamburger menüye tıklanma olayı (list iconunun açılıp kapanması)
@@ -128,3 +144,33 @@ function updateMail(e){
         renderMails(mailData);
     };
 };
+
+
+// ARAMA İŞLEMİ
+// zamanlayıcı tanımlandı
+let timer;
+ele.searchInp.addEventListener("input", (e) => {
+    // hala devam eden sayacı temizleme
+    clearTimeout(timer);
+    searchMails(e);
+});
+
+function searchMails(e){
+    // fonksiyonu çalıştırmak için sayaç başlatır
+    timer = setTimeout(() => {
+    // Arama terimi
+    const query = e.target.value.toLowerCase();
+    // Başlığı arama terimiyle eşleşen mailleri alma
+    const filtred = mailData.filter((mail) => 
+    mail.title.toLowerCase().includes(query));
+    // Ekranı Güncelle
+    renderMails(filtred);
+    }, 500);
+    
+};
+
+
+
+
+
+

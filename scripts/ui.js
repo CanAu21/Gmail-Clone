@@ -8,6 +8,7 @@ export const ele = {
     modal: document.querySelector(".modal-wrapper"),
     closeBtn: document.querySelector(".close-modal"),
     modalForm : document.querySelector(".modal-wrapper form"),
+    searchInp: document.querySelector("#search-inp"),
 };
 
 //! Ekrana Kategorileri Basma
